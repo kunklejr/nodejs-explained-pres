@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Node.js Explained</title>
+
+    <meta name="description" content="" />
+    <meta name="author" content="Jeff Kunkle" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/presentation.css" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<!--
+    
+    That's the wrapper for your presentation steps. In this element all the impress.js magic happens.
+    It doesn't have to be a `<div>`. Only `id` is important here as that's how the script find it.
+    
+    It's worth to notice the `impress-not-supported` class. This class means, that browser doesn't
+    support features required by impress.js, so you can apply some fallback styles in your CSS.
+    It's not necessary to add it manually on this element. If the script detects that browser is not
+    good enough it will add this class, but keeping it in HTML means that users without JavaScript
+    will also get fallback styles.
+    
+    The class name on this element also depends on currently active presentation step. More details about
+    it can be found below, when `hint` element is being described.
+    
+-->
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> for this presentation, so you are presented with a simplified version.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it. If you have an iPad, give that a try too.</p>
+    </div>
+
+    <!--
+        
+        Each step of the presentation should be an element inside the `#impress` with a class name
+        of `step`. These step elements are positioned, rotated and scaled by impress.js, and
+        the 'camera' shows them on each step of the presentation.
+        
+        Positioning information is passed through data attributes. So to make a summary of all the 
+		possible attributes used to position presentation steps, we have:
+
+		* `data-x`, `data-y`, `data-z` -- they define the position of **the center** of step element on
+		    the canvas in pixels; their default value is 0;
+		* `data-rotate-x`, `data-rotate-y`, 'data-rotate-z`, `data-rotate` -- they define the rotation of
+		    the element around given axis in degrees; their default value is 0; `data-rotate` and `data-rotate-z`
+		    are exactly the same;
+		* `data-scale` -- defines the scale of step element; default value is 1
+
+		The `id` attribute of the step element is used to identify it in the URL, but it's optional.
+		If it is not defined, it will get a default value of `step-N` where N is a number of slide.
+
+		The hash part of the url when this step is active will be `#/step-2`.
+
+		You can also use `#step-2` in a link, to point directly to this particular step.
+
+		Please note, that while `#/step-2` (with slash) would also work in a link it's not recommended.
+		Using classic `id`-based links like `#step-2` makes these links usable also in fallback mode.
+        
+    -->
+    <div id="title" class="step" data-x="0" data-y="0">
+        <img style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/>
+		<div class="footer">
+			<span>Jeff Kunkle</span>
+			<img class="logo" src="images/nic-logo.png"/>
+		</div>
+    </div>
+
+    <div id="agenda" class="step" data-x="1500" data-y="0">
+		<h1><span class="num">1</span> Theory</h1>
+		<h1><span class="num">2</span> Challenges</h1>
+		<h1><span class="num">3</span> Benefits</h1>
+    </div>
+
+    <div id="theory" class="step centered" data-x="3000" data-y="0">
+		<h1>Theory</h1>
+    </div>
+
+	<div id="latency" class="step" data-x="4500" data-y="0">
+		<h1 class="slide-title">I/O Latency</h1>
+    </div>
+
+</div>
+
+<!--
+    
+    To make all described above really work, you need to include impress.js in the page.
+    I strongly encourage to minify it first.
+    
+    You also need to call a `impress()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. Not only because it's a good practice, but also
+    because I should be done when the whole document is ready.
+    Of course you can wrap it in any kind of "DOM ready" event, but I was to lazy to do so ;)
+    
+-->
+<script src="js/impress.js"></script>
+<script>impress();</script>
+<script src="js/raphael-min.js"></script>
+<script src="js/drawing.js"></script>
+
+<!--
+    
+    The `impress()` function also gives you access to API to control the presentation.
+    
+    Just store the result of the call:
+    
+        var api = impress();
+    
+    and you will get three functions you can call:
+    
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation
+        `api.goto( stepElement ) - moves the presentation to given step element (the DOM element of the step).
+    
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+    
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+    
+-->
+
+</body>
+</html>
