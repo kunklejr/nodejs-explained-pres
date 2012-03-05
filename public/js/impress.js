@@ -225,7 +225,10 @@
 
         var active = null;
         var hashTimeout = null;
-        
+        var callbacks = {
+			step: []
+		};
+
         var goto = function ( el ) {
             if ( !isStep(el) || el == active) {
                 // selected element is not defined as step or is already active
@@ -243,6 +246,11 @@
             window.scrollTo(0, 0);
             
             var step = stepData["impress-" + el.id];
+
+			var cbLength = callbacks.step.length;
+			for (var i = 0; i < cbLength; i++) {
+				callbacks.step[i].call(this, step);
+			}
             
             if ( active ) {
                 active.classList.remove("active");
@@ -316,6 +324,10 @@
             
             return goto(next);
         };
+
+		var on = function(event, cb) {
+			callbacks[event].push(cb);
+		}
         
         window.addEventListener("hashchange", function () {
             goto( getElementFromUrl() );
@@ -332,7 +344,8 @@
         return (roots[ "impress-root-" + rootId ] = {
             goto: goto,
             next: next,
-            prev: prev
+            prev: prev,
+			on: on
         });
 
     }
