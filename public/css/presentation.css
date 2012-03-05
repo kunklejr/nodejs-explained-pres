@@ -37,6 +37,22 @@ h1 {
 	font-size: 200%;
 }
 
+table {
+	border-top: 1px solid #8CC84B;
+	border-left: 1px solid #8CC84B;
+}
+
+td {
+  padding: 10px 20px;
+	border-right: 1px solid #8CC84B;
+	border-bottom: 1px solid #8CC84B;
+  text-align: center;
+}
+
+td.gutter, td.code {
+  font-size: 10%;
+}
+
 .step {
     width: 1024px;
     padding: 40px;

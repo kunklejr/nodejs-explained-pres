@@ -12,6 +12,8 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
     <link href="css/reset.css" rel="stylesheet" />
     <link href="css/presentation.css" rel="stylesheet" />
+    <link href="css/shCore.css" rel="stylesheet" />
+    <link href="css/shCoreDefault.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
@@ -86,8 +88,63 @@
 
 	<div id="latency" class="step" data-x="4500" data-y="0">
 		<h1 class="slide-title">I/O Latency</h1>
-    </div>
+    <table>
+      <tr><td>L1</td><td>3 cycles</td></tr>
+      <tr><td>L2</td><td>14 cycles</td></tr>
+      <tr><td>RAM</td><td>250 cycles</td></tr>
+      <tr><td>Disk</td><td>41,000,000</td></tr>
+      <tr><td>Network</td><td>240,000,000</td></tr>
+    </table>
+  </div>
 
+	<div id="latency-bar-graph" class="step" data-x="6000" data-y="0">
+    <img src="images/latency-bar-graph.png"/>
+  </div>
+
+	<div id="latency-multiplier" class="step" data-x="7500" data-y="0">
+		<h1 class="slide-title">I/O Latency</h1>
+    <table>
+      <tr><td>&nbsp;</td><td>L2</td><td>RAM</td><td>Disk</td><td>Network</td></tr>
+      <tr><td>L1</td><td>5</td><td>83</td><td>13,666,666</td><td>80,000,000</td></tr>
+      <tr><td>L2</td><td>&nbsp;</td><td>18</td><td>2,928,571</td><td>17,142,857</td></tr>
+      <tr><td>RAM</td><td>&nbsp;</td><td>&nbsp;</td><td>164,000</td><td>960,000</td></tr>
+      <tr><td>Disk</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>6</td></tr>
+    </table>
+  </div>
+
+	<div id="waiting" class="step" data-x="9000" data-y="0">
+		<h1 class="slide-title">Waiting...</h1>
+    <img src="images/waiting.png"/>
+  </div>
+
+	<div id="scale-threads" class="step" data-x="10500" data-y="0">
+		<h1 class="slide-title">Scale with Threads</h1>
+    <img src="images/scaling-threads.png"/>
+  </div>
+
+	<div id="scale-processes" class="step" data-x="12000" data-y="0">
+		<h1 class="slide-title">Scale with Processes</h1>
+    <img src="images/scaling-processes.png"/>
+  </div>
+
+	<div id="scale-event-loop" class="step" data-x="13500" data-y="0">
+		<h1 class="slide-title">Scale Event Loop</h1>
+    <img src="images/scaling-event-loop.png"/>
+  </div>
+
+	<div id="platform" class="step" data-x="15000" data-y="0">
+		<h1 class="slide-title">Platform</h1>
+    <img src="images/platform.png"/>
+  </div>
+
+	<div id="example-1" class="step" data-x="16500" data-y="0">
+		<h1 class="slide-title">Examples</h1>
+    <pre class="brush: js">
+setTimeout(function () {
+  console.log('This will still run.');
+}, 500);
+    </pre>
+  </div>
 </div>
 
 <!--
@@ -102,11 +159,14 @@
     
 -->
 <script src="js/impress.js"></script>
-<script>var presentation = impress();</script>
+<script type="text/javascript">var presentation = impress();</script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/presentation.js"></script>
 <script src="js/raphael-min.js"></script>
 <script src="js/drawing.js"></script>
+<script src="js/shCore.js"></script>
+<script src="js/shBrushJScript.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
 
 <!--
     
