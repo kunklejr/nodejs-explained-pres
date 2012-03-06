@@ -69,6 +69,38 @@
         
     -->
     <div id="title" class="step" data-x="0" data-y="0">
+<div id="twitter">
+<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+  version: 2,
+  type: 'search',
+  search: '#nodejs',
+  interval: 5000,
+  title: 'Node.js',
+  subject: '',
+  width: 250,
+  height: 408,
+  theme: {
+    shell: {
+      background: '#8cc84b',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#ffffff',
+      color: '#444444',
+      links: '#1985b5'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: true,
+    live: true,
+    behavior: 'default'
+  }
+}).render().start();
+</script>
+</div>
         <a target="_blank" href="http://nodejs.org"><img style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/></a>
 		<div class="footer">
 			<span>Jeff Kunkle</span>

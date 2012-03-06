@@ -135,6 +135,11 @@ img.benchmark {
   width: 800px;
 }
 
+#twitter {
+  float: right;
+  margin-top: -100px;
+}
+
 #title {
 	text-align: center;
 }
@@ -147,6 +152,7 @@ img.benchmark {
 	font-size: 80%;
 	border: 5px solid #8CC84B;
 	border-radius: 10px;
+  width: 700px;
 }
 
 #title img.logo {
