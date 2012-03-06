@@ -254,3 +254,58 @@ img.benchmark {
   font-size: 145%;
   margin-top: 20px;
 }
+
+#smart-steps h1 {
+  line-height: 1;
+  font-size: 140%;
+}
+
+#smart-steps .num {
+  font-size: 200%;
+	color: #8CC84B;
+  background: none;
+}
+
+#packages table {
+  border: none;
+  width: 100%;
+  margin-left: 50px;
+}
+
+#packages td {
+  border: none;
+  text-align: left;
+}
+
+#packages .desc {
+  font-size: 50%;
+  color: #A6AC94;
+  margin-top: -20px;
+  margin-left: 50px;
+}
+
+#questions div.floater {
+  float: right;
+  text-align: center;
+}
+
+#questions div.contact {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  padding: 30px;
+}
+
+#questions h2 {
+  margin-bottom: 20px;
+}
+
+#questions h3 {
+	color: rgb(255, 120, 1);
+  font-size: 60%;
+  margin-bottom: -15px;
+}
+
+#questions div.contact img {
+  margin-top: 50px;
+}
