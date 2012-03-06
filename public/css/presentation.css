@@ -42,11 +42,20 @@ table {
 	border-left: 1px solid #8CC84B;
 }
 
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 td {
   padding: 10px 20px;
 	border-right: 1px solid #8CC84B;
 	border-bottom: 1px solid #8CC84B;
   text-align: center;
+}
+
+tr:nth-child(2n) {
+  background-color: rgb(92, 94, 82);
 }
 
 div.code {
@@ -56,6 +65,7 @@ div.code {
 caption {
 	color: #A6AC94;
   font-size: 40%;
+  text-align: center;
 }
 
 .step {
@@ -192,6 +202,10 @@ img.benchmark {
   padding-bottom: 0;
 }
 
+#rapidly-changing tr {
+  background-color: inherit;
+}
+
 #rapidly-changing .date {
   font-size: 60%;
   color: #A6AC94;
@@ -276,6 +290,10 @@ img.benchmark {
   border: none;
   width: 100%;
   margin-left: 50px;
+}
+
+#packages tr {
+  background-color: inherit;
 }
 
 #packages td {
