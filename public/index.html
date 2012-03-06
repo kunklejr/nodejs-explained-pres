@@ -69,7 +69,7 @@
         
     -->
     <div id="title" class="step" data-x="0" data-y="0">
-        <img style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/>
+        <a target="_blank" href="http://nodejs.org"><img style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/></a>
 		<div class="footer">
 			<span>Jeff Kunkle</span>
 			<img class="logo" src="images/nic-logo.png"/>
@@ -83,18 +83,21 @@
     </div>
 
     <div id="theory" class="step centered" data-x="3000" data-y="0">
-		<h1>Theory</h1>
+    <h1><span class="num">1</span> Theory</h1>
     </div>
 
 	<div id="latency" class="step" data-x="4500" data-y="0">
 		<h1 class="slide-title">I/O Latency</h1>
-    <table>
-      <tr><td>L1</td><td>3 cycles</td></tr>
-      <tr><td>L2</td><td>14 cycles</td></tr>
-      <tr><td>RAM</td><td>250 cycles</td></tr>
-      <tr><td>Disk</td><td>41,000,000</td></tr>
-      <tr><td>Network</td><td>240,000,000</td></tr>
-    </table>
+    <div class="centered">
+      <table>
+        <tr><td>L1</td><td>3 cycles</td></tr>
+        <tr><td>L2</td><td>14 cycles</td></tr>
+        <tr><td>RAM</td><td>250 cycles</td></tr>
+        <tr><td>Disk</td><td>41,000,000</td></tr>
+        <tr><td>Network</td><td>240,000,000</td></tr>
+        <caption>Source: Ryan Dahl’s 2008.11.08 node.js presentation</caption>
+      </table>
+    </div>
   </div>
 
 	<div id="latency-bar-graph" class="step" data-x="6000" data-y="0">
@@ -128,23 +131,225 @@
   </div>
 
 	<div id="scale-event-loop" class="step" data-x="13500" data-y="0">
-		<h1 class="slide-title">Scale Event Loop</h1>
+		<h1 class="slide-title">Scale with Event Loop</h1>
     <img src="images/scaling-event-loop.png"/>
   </div>
 
-	<div id="platform" class="step" data-x="15000" data-y="0">
+	<div id="event-loop" class="step" data-x="15000" data-y="0">
+		<h1 class="slide-title">Node.js Event Loop</h1>
+    <div class="centered">
+      <img src="images/event-loop.png"/>
+    </div>
+  </div>
+
+	<div id="platform" class="step" data-x="16500" data-y="0">
 		<h1 class="slide-title">Platform</h1>
     <img src="images/platform.png"/>
   </div>
 
-	<div id="example-1" class="step" data-x="16500" data-y="0">
+	<div id="example-1" class="step" data-x="18000" data-y="0">
 		<h1 class="slide-title">Examples</h1>
-    <pre class="brush: js">
+    <div class="code">
+      <pre class="brush: js">
 setTimeout(function () {
   console.log('This will still run.');
 }, 500);
-    </pre>
+      </pre>
+    </div>
   </div>
+
+	<div id="example-http-server" class="step" data-x="19500" data-y="0">
+		<h1 class="slide-title">HTTP Server</h1>
+    <div class="code">
+      <pre class="brush: js">
+var http = require('http');
+
+http.createServer(function(req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(8124);
+
+console.log('Running at 127.0.0.1:8124');
+      </pre>
+    </div>
+  </div>
+
+	<div id="example-serve-static-file" class="step" data-x="21000" data-y="0">
+		<h1 class="slide-title">Serve a Static File</h1>
+    <div class="code">
+      <pre class="brush: js">
+var http = require('http');
+http.createServer(function (req, res) {
+  fs.readFile('/etc/passwd', function(err, data) {
+    if (err) {
+      res.writeHead(500, err.message);
+      res.end();
+    } else {
+      res.writeHead(200, {
+        'Content-Type': 'text/plain'
+      });
+      res.end(data);
+    }
+  });
+}).listen(8124);
+      </pre>
+    </div>
+  </div>
+
+	<div id="example-read-file-chunks" class="step" data-x="22500" data-y="0">
+		<h1 class="slide-title">Read a File in Chunks</h1>
+    <div class="code">
+      <pre class="brush: js">
+var fs = require('fs');
+var stream = fs.createReadStream('huge.txt');
+
+stream.on('data', function(data) {
+ console.log(data);
+});
+stream.on('end', function() {
+ console.log('done');
+});
+stream.on('error', function(err) {
+ console.log(err);
+});
+      </pre>
+    </div>
+  </div>
+
+  <div id="challenges" class="step centered" data-x="24000" data-y="0">
+    <h1><span class="num">2</span> Challenges</h1>
+  </div>
+
+	<div id="async-io" class="step" data-x="25500" data-y="0">
+		<h1 class="slide-title">Asynchronous I/O</h1>
+    <div class="code">
+      <pre class="brush: js">
+var fs = require('fs');
+
+fs.stat('/etc/passwd', function(err, stats) {
+  if (err) return;
+  if (stats.isFile()) {
+    fs.readFile('/etc/passwd', function(err, data) {
+      if (err) throw err;
+      console.log(data);
+    });
+  }
+});
+      </pre>
+    </div>
+  </div>
+
+	<div id="debugging" class="step" data-x="27000" data-y="0">
+		<h1 class="slide-title">Debugging</h1>
+  </div>
+
+	<div id="cpu-intensive-tasks" class="step" data-x="28500" data-y="0">
+		<h1 class="slide-title">CPU-intensive Tasks</h1>
+    <h2><span class="num">1</span> thread</h2>
+    <h3>be careful!</h3>
+  </div>
+
+	<div id="rapidly-changing" class="step" data-x="30000" data-y="0">
+		<h1 class="slide-title">Rapidly Changing</h1>
+    <table>
+      <tr>
+        <td>v0.6.12 <span class="date">2012.03.02</span></td>
+        <td>v0.7.5 <span class="date">2012.02.23</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.11 <span class="date">2012.02.17</span></td>
+        <td>v0.7.4 <span class="date">2012.02.14</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.10 <span class="date">2012.02.02</span></td>
+        <td>v0.7.3 <span class="date">2012.02.07</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.9 <span class="date">2012.01.27</span></td>
+        <td>v0.7.2 <span class="date">2012.02.01</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.8 <span class="date">2012.01.19</span></td>
+        <td>v0.7.1 <span class="date">2012.01.23</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.7 <span class="date">2012.01.06</span></td>
+        <td>v0.7.0 <span class="date">2012.01.16</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="benefits" class="step centered" data-x="31500" data-y="0">
+    <h1><span class="num">3</span> Benefits</h1>
+  </div>
+
+	<div id="multi-platform" class="step" data-x="33000" data-y="0">
+    <h1 class="slide-title">Multi-Platform</h1>
+    <div class="centered">
+      <img src="images/nodejs-download.png"/>
+    </div>
+  </div>
+
+	<div id="lightweight" class="step" data-x="34500" data-y="0">
+		<h1 class="slide-title">Lightweight</h1>
+    <h3>single thread</h3>
+  </div>
+
+	<div id="dead-lock-free" class="step" data-x="36000" data-y="0">
+		<h1 class="slide-title">Dead-lock Free</h1>
+    <h3>single thread simplifies concurrency</h3>
+  </div>
+
+	<div id="monoglot" class="step" data-x="37500" data-y="0">
+		<h1 class="slide-title">Monoglot Programming</h1>
+    <h2>JavaScript on the client</h2>
+    <h3>JavaScript on the server</h3>
+  </div>
+
+	<div id="github-popular" class="step" data-x="39000" data-y="0">
+		<h1 class="slide-title">Popular</h1>
+    <div class="centered">
+      <a target="_blank" href="https://github.com/popular/watched"><img src="images/github-popular.png"/></a>
+    </div>
+  </div>
+
+	<div id="fast-ruby" class="step" data-x="40500" data-y="0">
+		<h1 class="slide-title">Fast</h1>
+    <div class="centered">
+      <a target="_blank" href="http://shootout.alioth.debian.org/u32/benchmark.php"><img class="benchmark" src="http://shootout.alioth.debian.org/u32/chartvs.php?r=eNodTskRBEEISklbVIjC%2FLNZZl8Wt72K2gMDmQdhpm42SjSJZZnstKU5hjd4KwfEWpOPFc45YQ3SKG4eEDggRf07k1eM6Gcn%2Bay1lLrWLPI6mQOfx7TF6%2BvZRdWHsL3u9EIY2fn9uW%2FeD1l9KXk%3D&m=eNozMFHwTSxSMDIwNFIoNTZSyAMAI98EEg%3D%3D&w=eNqrTCwq8y%2BzAAALvwLA"/></a>
+    </div>
+  </div>
+
+	<div id="vibrant-community" class="step" data-x="42000" data-y="0">
+		<h1 class="slide-title">Vibrant Community</h1>
+    <div class="centered">
+      <a target="_blank" href="http://search.npmjs.org/"><img src="images/npm.png"/></a>
+      <h2>7,728 packages</h2>
+      <h3>as of 11:30pm EDT 2012.03.05</h3>
+    </div>
+  </div>
+
+	<div id="conceptually-simple" class="step" data-x="43500" data-y="0">
+		<h1 class="slide-title">Conceptually Simple</h1>
+    <div class="centered">
+      <img src="images/event-loop.png"/>
+    </div>
+  </div>
+
+	<div id="small-core" class="step" data-x="45000" data-y="0">
+		<h1 class="slide-title">Small Core</h1>
+    <h2><span class="num">36</span> JavaScript source files</h2>
+    <h2><span class="num">36</span> C++ source files</h2>
+  </div>
+
+	<div id="learning-curve" class="step" data-x="46500" data-y="0">
+		<h1 class="slide-title">Short Learning Curve</h1>
+    <h2><img src="images/check.png"/> Understand Node.js Theory</h2>
+    <h2><img src="images/check.png"/> Understand JavaScript</h2>
+    <h2><img src="images/check.png"/> Understand Evented Programming</h2>
+    <h3>You just need to learn new APIs</h3>
+  </div>
+
 </div>
 
 <!--
@@ -163,7 +368,6 @@ setTimeout(function () {
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/presentation.js"></script>
 <script src="js/raphael-min.js"></script>
-<script src="js/drawing.js"></script>
 <script src="js/shCore.js"></script>
 <script src="js/shBrushJScript.js"></script>
 <script type="text/javascript">SyntaxHighlighter.all();</script>
