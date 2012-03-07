@@ -19,7 +19,7 @@ var broadcast = function(event, data, ignoreSocket) {
       sockets[i].emit(event, data);
     }
   }
-  if (ignoreSocket === undefined || ignoreSocket !== masterSocket) {
+  if (masterSocket && (ignoreSocket === undefined || ignoreSocket !== masterSocket)) {
     masterSocket.emit(event, data);
   }
 };
@@ -64,6 +64,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('disconnect', function() {
     console.log('Socket disconnected');
     removeSocket(socket);
+    broadcast('connections', sockets.length + 1);
   });
   broadcast('connections', sockets.length + 1);
 });
