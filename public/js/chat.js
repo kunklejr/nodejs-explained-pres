@@ -30,7 +30,7 @@ var chat = {
   }
 };
 
-if (window.io) {
+if (window.io && navigator.userAgent.match(/iPad/i) == null) {
   document.addEventListener('keydown', function (event) {
     if (event.keyCode && event.keyCode == 67) {
       if (chat.enabled) {
