@@ -348,3 +348,13 @@ img.benchmark {
 #questions div.contact img {
   margin-top: 50px;
 }
+
+#status {
+  position: fixed;
+  bottom: 0;
+  background: #45473D;
+  padding: 5px;
+	color: #A6AC94;
+  width: 100%;
+  font-size: 80%;
+}
