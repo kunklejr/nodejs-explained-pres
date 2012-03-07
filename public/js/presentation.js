@@ -11,7 +11,7 @@ if (window.io) {
   });
 
   socket.on('connections', function (num) {
-    var el = document.getElementById('connections');
-    el.innerHTML = num + ' participants';
+    var el = document.getElementById('status');
+    el.innerHTML = num + " participants, press 'c' to chat with them";
   });
 }

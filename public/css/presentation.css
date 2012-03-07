@@ -358,3 +358,44 @@ img.benchmark {
   width: 100%;
   font-size: 80%;
 }
+
+#chat {
+  background: #45473D;
+  position: absolute;
+  width: 200px;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  display:none;
+	color: #A6AC94;
+}
+
+#chat.active {
+  display: block;
+}
+
+#chat a {
+  text-align: right;
+  margin-bottom: 10px;
+  float: right;
+}
+
+#chat-log {
+  background-color: white;
+  height: 250px;
+  width: 190px;
+	color: black;
+  padding: 5px;
+  font-size: 80%;
+  overflow: auto;
+}
+
+#chat-log p {
+  margin-bottom: 0.5em;
+}
+
+#chat-input {
+  margin-top: 10px;
+  width: 195px;
+	color: black;
+}

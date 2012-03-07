@@ -2,9 +2,11 @@ var os = require('os');
 var express = require('express');
 var app = express.createServer();
 var io = require('socket.io').listen(app);
+var fs = require('fs');
 
 var sockets = [];
 var masterSocket = null;
+var chatLog = fs.createWriteStream('chat.log', { flags: 'a' });
 
 app.configure(function() {
   app.use(express.static(__dirname + '/public'));
@@ -54,6 +56,15 @@ var findLocalAddress = function() {
   }
 }
 
+var onChat = function(msg) {
+  if (msg === null || msg === undefined ||
+      msg.indexOf('<') > -1 || msg.indexOf('>') > -1) {
+    return;
+  }
+  broadcast('chat', msg);
+  chatLog.write(msg +'\n');
+};
+
 io.sockets.on('connection', function (socket) {
   addSocket(socket);
   socket.on('step', function (stepId) {
@@ -66,6 +77,7 @@ io.sockets.on('connection', function (socket) {
     removeSocket(socket);
     broadcast('connections', sockets.length + 1);
   });
+  socket.on('chat', onChat.bind(this));
   broadcast('connections', sockets.length + 1);
 });
 

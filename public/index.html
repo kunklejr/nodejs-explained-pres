@@ -403,7 +403,14 @@ fs.stat('/etc/passwd', function(err, stats) {
 </div>
 
 <div id="status">
-  <div id="connections">0 participants</div>
+  0 participants, press 'c' to chat with them
+</div>
+
+<div id="chat">
+  <span>Chat</span>
+  <a href="#" onclick="javascript:chat.close(); return false;">X</a>
+  <div id="chat-log"></div>
+  <input id="chat-input" type="text" name="message" placeholder="type chat here"/>
 </div>
 <!--
     
@@ -420,6 +427,7 @@ fs.stat('/etc/passwd', function(err, stats) {
 <script type="text/javascript">var presentation = impress();</script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/presentation.js"></script>
+<script src="js/chat.js"></script>
 <script src="js/shCore.js"></script>
 <script src="js/shBrushJScript.js"></script>
 <script type="text/javascript">SyntaxHighlighter.all();</script>
