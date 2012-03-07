@@ -69,43 +69,13 @@
         
     -->
     <div id="title" class="step" data-x="0" data-y="0">
-<div id="twitter">
-<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-<script>
-new TWTR.Widget({
-  version: 2,
-  type: 'search',
-  search: '#nodejs',
-  interval: 5000,
-  title: 'Node.js',
-  subject: '',
-  width: 250,
-  height: 408,
-  theme: {
-    shell: {
-      background: '#8cc84b',
-      color: '#ffffff'
-    },
-    tweets: {
-      background: '#ffffff',
-      color: '#444444',
-      links: '#1985b5'
-    }
-  },
-  features: {
-    scrollbar: false,
-    loop: true,
-    live: true,
-    behavior: 'default'
-  }
-}).render().start();
-</script>
-</div>
-        <a target="_blank" href="http://nodejs.org"><img style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/></a>
+        <a target="_blank" href="http://nodejs.org"><img class="node-logo" style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/></a>
+        <h2>explained</h2>
 		<div class="footer">
 			<span>Jeff Kunkle</span>
-			<img class="logo" src="images/nic-logo.png"/>
+			<img class="nic-logo" src="images/nic-logo.png"/>
 		</div>
+        <h3>Please connect to http://192.168.1.25:3000 using Chrome, Safari, or mobile Safari on iPad</h3>
     </div>
 
     <div id="agenda" class="step" data-x="1500" data-y="0">
@@ -415,8 +385,7 @@ fs.stat('/etc/passwd', function(err, stats) {
   </div>
 
   <div id="questions" class="step" data-x="52500" data-y="0">
-    <img src="images/me.png"/>
-    <div class="floater">
+    <div class="centered">
       <h1>Questions?</h1>
       <div class="contact">
         <h2>Jeff Kunkle</h2>

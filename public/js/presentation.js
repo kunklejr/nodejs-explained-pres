@@ -1,5 +1,5 @@
 if (window.io) {
-  var socket = io.connect('http://192.168.13.124:3000');
+  var socket = io.connect('http://192.168.1.52:3000');
 
   socket.on('step', function (stepId) {
     var el = document.getElementById(stepId);

@@ -145,11 +145,6 @@ img.benchmark {
   width: 800px;
 }
 
-#twitter {
-  float: right;
-  margin-top: -100px;
-}
-
 #title {
 	text-align: center;
 }
@@ -160,14 +155,31 @@ img.benchmark {
 	color: black;
 	padding: 10px;
 	font-size: 80%;
-	border: 5px solid #8CC84B;
+	border: 5px solid #A6AC94;
 	border-radius: 10px;
-  width: 700px;
+  margin-top: 30px;
 }
 
-#title img.logo {
+#title img.node-logo {
+  position: relative;
+  top: 50px;
+}
+
+#title img.nic-logo {
 	float: right;
-	margin-top: 10px;
+  margin-top: 10px;
+}
+
+#title h2 {
+  position: relative;
+  top: -130px;
+  font-size: 60%;
+}
+
+#title h3 {
+  font-size: 30%;
+  color: #A6AC94;
+  margin-top: 20px;
 }
 
 #agenda {
@@ -318,6 +330,9 @@ img.benchmark {
   border-radius: 10px;
   color: black;
   padding: 30px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #questions h2 {
