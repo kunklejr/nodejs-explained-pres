@@ -15,8 +15,7 @@ app.configure(function() {
 app.listen(3000);
 
 var broadcast = function(event, data, ignoreSocket) {
-  var socketLength = sockets.length;
-  for (var i = 0; i < socketLength; i++) {
+  for (var i = 0, l = sockets.length; i < l; i++) {
     if (sockets[i] !== ignoreSocket) {
       sockets[i].emit(event, data);
     }
@@ -27,7 +26,7 @@ var broadcast = function(event, data, ignoreSocket) {
 };
 
 var addSocket = function(socket) {
-  if (masterSocket === null) {
+  if (masterSocket === null && socket.handshake.address.address === findLocalAddress()) {
     masterSocket = socket;
   } else {
     sockets.push(socket);
@@ -38,8 +37,7 @@ var removeSocket = function (socket) {
   if (socket === masterSocket) {
     masterSocket = null;
   } else {
-    var socketLength = sockets.length;
-    for (var i = 0; i < socketLength; i++) {
+    for (var i = 0, l = sockets.length; i < l; i++) {
       if (socket === sockets[i]) {
         return sockets.splice(i, 1);
       }
@@ -49,7 +47,7 @@ var removeSocket = function (socket) {
 
 var findLocalAddress = function() {
   var en1 = os.networkInterfaces().en1;
-  for (var i = 0, length = en1.length; i < length; i++) {
+  for (var i = 0, l = en1.length; i < l; i++) {
     if (en1[i].family === 'IPv4') {
       return en1[i].address;
     }
@@ -62,7 +60,7 @@ var onChat = function(msg) {
     return;
   }
   broadcast('chat', msg);
-  chatLog.write(msg +'\n');
+  chatLog.write(msg + '\n');
 };
 
 io.sockets.on('connection', function (socket) {
@@ -75,7 +73,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('disconnect', function() {
     console.log('Socket disconnected');
     removeSocket(socket);
-    broadcast('connections', sockets.length + 1);
+    broadcast('connections', sockets.length + 1); // need to include master socket
   });
   socket.on('chat', onChat.bind(this));
   broadcast('connections', sockets.length + 1);
