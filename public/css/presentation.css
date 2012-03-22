@@ -212,6 +212,7 @@ img.benchmark {
 #rapidly-changing td {
   border: none;
   padding-bottom: 0;
+  font-size: 90%;
 }
 
 #rapidly-changing tr {
