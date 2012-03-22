@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Node.js Explained</title>
+
+    <meta name="description" content="" />
+    <meta name="author" content="Jeff Kunkle" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/reset.css" rel="stylesheet" />
+    <link href="css/presentation.css" rel="stylesheet" />
+    <link href="css/shCore.css" rel="stylesheet" />
+    <link href="css/shCoreDefault.css" rel="stylesheet" />
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body>
+
+<!--
+    
+    That's the wrapper for your presentation steps. In this element all the impress.js magic happens.
+    It doesn't have to be a `<div>`. Only `id` is important here as that's how the script find it.
+    
+    It's worth to notice the `impress-not-supported` class. This class means, that browser doesn't
+    support features required by impress.js, so you can apply some fallback styles in your CSS.
+    It's not necessary to add it manually on this element. If the script detects that browser is not
+    good enough it will add this class, but keeping it in HTML means that users without JavaScript
+    will also get fallback styles.
+    
+    The class name on this element also depends on currently active presentation step. More details about
+    it can be found below, when `hint` element is being described.
+    
+-->
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> for this presentation, so you are presented with a simplified version.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it. If you have an iPad, give that a try too.</p>
+    </div>
+
+    <!--
+        
+        Each step of the presentation should be an element inside the `#impress` with a class name
+        of `step`. These step elements are positioned, rotated and scaled by impress.js, and
+        the 'camera' shows them on each step of the presentation.
+        
+        Positioning information is passed through data attributes. So to make a summary of all the 
+		possible attributes used to position presentation steps, we have:
+
+		* `data-x`, `data-y`, `data-z` -- they define the position of **the center** of step element on
+		    the canvas in pixels; their default value is 0;
+		* `data-rotate-x`, `data-rotate-y`, 'data-rotate-z`, `data-rotate` -- they define the rotation of
+		    the element around given axis in degrees; their default value is 0; `data-rotate` and `data-rotate-z`
+		    are exactly the same;
+		* `data-scale` -- defines the scale of step element; default value is 1
+
+		The `id` attribute of the step element is used to identify it in the URL, but it's optional.
+		If it is not defined, it will get a default value of `step-N` where N is a number of slide.
+
+		The hash part of the url when this step is active will be `#/step-2`.
+
+		You can also use `#step-2` in a link, to point directly to this particular step.
+
+		Please note, that while `#/step-2` (with slash) would also work in a link it's not recommended.
+		Using classic `id`-based links like `#step-2` makes these links usable also in fallback mode.
+        
+    -->
+    <div id="title" class="step" data-x="0" data-y="0">
+        <a target="_blank" href="http://nodejs.org"><img class="node-logo" style="margin-bottom: 150px;" src="images/nodejs-logo-dark.png"/></a>
+        <h2>explained</h2>
+		<div class="footer">
+			<span>Jeff Kunkle</span>
+			<img class="nic-logo" src="images/nic-logo.png"/>
+		</div>
+        <h3>Please connect to http://192.168.13.124:3000 using Chrome, Safari, or mobile Safari on iPad</h3>
+    </div>
+
+    <div id="agenda" class="step" data-x="1500" data-y="0">
+      <h1><span class="num">1</span> Theory</h1>
+      <h1><span class="num">2</span> Challenges</h1>
+      <h1><span class="num">3</span> Benefits</h1>
+      <h1><span class="num">4</span> Getting Smart</h1>
+    </div>
+
+    <div id="theory" class="step centered" data-x="0" data-y="900">
+      <h1><span class="num">1</span> Theory</h1>
+    </div>
+
+	<div id="latency" class="step" data-x="1500" data-y="900">
+		<h1 class="slide-title">I/O Latency</h1>
+    <table class="center">
+      <tr><td>L1</td><td>3 cycles</td></tr>
+      <tr><td>L2</td><td>14 cycles</td></tr>
+      <tr><td>RAM</td><td>250 cycles</td></tr>
+      <tr><td>Disk</td><td>41,000,000</td></tr>
+      <tr><td>Network</td><td>240,000,000</td></tr>
+      <caption>Source: Ryan Dahl’s 2008.11.08 node.js presentation</caption>
+    </table>
+  </div>
+
+	<div id="latency-bar-graph" class="step" data-x="3000" data-y="900">
+    <img src="images/latency-bar-graph.png"/>
+  </div>
+
+	<div id="latency-multiplier" class="step" data-x="4500" data-y="900">
+		<h1 class="slide-title">I/O Latency</h1>
+    <table>
+      <tr><td>&nbsp;</td><td>L2</td><td>RAM</td><td>Disk</td><td>Network</td></tr>
+      <tr><td>L1</td><td>5</td><td>83</td><td>13,666,666</td><td>80,000,000</td></tr>
+      <tr><td>L2</td><td>&nbsp;</td><td>18</td><td>2,928,571</td><td>17,142,857</td></tr>
+      <tr><td>RAM</td><td>&nbsp;</td><td>&nbsp;</td><td>164,000</td><td>960,000</td></tr>
+      <tr><td>Disk</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>6</td></tr>
+    </table>
+  </div>
+
+	<div id="waiting" class="step" data-x="6000" data-y="900">
+		<h1 class="slide-title">Waiting...</h1>
+    <img src="images/waiting.png"/>
+  </div>
+
+	<div id="scale-threads" class="step" data-x="7500" data-y="900">
+		<h1 class="slide-title">Scale with Threads</h1>
+    <img src="images/scaling-threads.png"/>
+  </div>
+
+	<div id="scale-processes" class="step" data-x="9000" data-y="900">
+		<h1 class="slide-title">Scale with Processes</h1>
+    <img src="images/scaling-processes.png"/>
+  </div>
+
+	<div id="scale-event-loop" class="step" data-x="10500" data-y="900">
+		<h1 class="slide-title">Scale with Event Loop</h1>
+    <img src="images/scaling-event-loop.png"/>
+  </div>
+
+	<div id="event-loop" class="step" data-x="12000" data-y="900">
+		<h1 class="slide-title">Node.js Event Loop</h1>
+    <div class="centered">
+      <img src="images/event-loop.png"/>
+    </div>
+  </div>
+
+	<div id="platform" class="step" data-x="13500" data-y="900">
+		<h1 class="slide-title">Platform</h1>
+    <img src="images/platform.png"/>
+  </div>
+
+	<div id="example-1" class="step" data-x="15000" data-y="900">
+		<h1 class="slide-title">Examples</h1>
+    <div class="code">
+      <pre class="brush: js">
+setTimeout(function () {
+  console.log('This will still run.');
+}, 500);
+      </pre>
+    </div>
+  </div>
+
+	<div id="example-http-server" class="step" data-x="16500" data-y="900">
+		<h1 class="slide-title">Bad Hello World</h1>
+    <div class="code">
+      <pre class="brush: js">
+var http = require('http');
+
+http.createServer(function(req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(8124);
+
+console.log('Running at 127.0.0.1:8124');
+      </pre>
+    </div>
+  </div>
+
+	<div id="example-serve-static-file" class="step" data-x="18000" data-y="900">
+		<h1 class="slide-title">Serve a Static File</h1>
+    <div class="code">
+      <pre class="brush: js">
+var http = require('http');
+http.createServer(function (req, res) {
+  fs.readFile('/etc/passwd', function(err, data) {
+    if (err) {
+      res.writeHead(500, err.message);
+      res.end();
+    } else {
+      res.writeHead(200, {
+        'Content-Type': 'text/plain'
+      });
+      res.end(data);
+    }
+  });
+}).listen(8124);
+      </pre>
+    </div>
+  </div>
+
+	<div id="example-read-file-chunks" class="step" data-x="19500" data-y="900">
+		<h1 class="slide-title">Read a File in Chunks</h1>
+    <div class="code">
+      <pre class="brush: js">
+var fs = require('fs');
+var stream = fs.createReadStream('huge.txt');
+
+stream.on('data', function(data) {
+ console.log(data);
+});
+stream.on('end', function() {
+ console.log('done');
+});
+stream.on('error', function(err) {
+ console.log(err);
+});
+      </pre>
+    </div>
+  </div>
+
+  <div id="challenges" class="step centered" data-x="0" data-y="1800">
+    <h1><span class="num">2</span> Challenges</h1>
+  </div>
+
+	<div id="async-io" class="step" data-x="1500" data-y="1800">
+		<h1 class="slide-title">Asynchronous I/O</h1>
+    <div class="code">
+      <pre class="brush: js">
+var fs = require('fs');
+
+fs.stat('/etc/passwd', function(err, stats) {
+  if (err) return;
+  if (stats.isFile()) {
+    fs.readFile('/etc/passwd', function(err, data) {
+      if (err) throw err;
+      console.log(data);
+    });
+  }
+});
+      </pre>
+    </div>
+  </div>
+
+	<div id="debugging" class="step" data-x="3000" data-y="1800">
+		<h1 class="slide-title">Debugging</h1>
+  </div>
+
+	<div id="cpu-intensive-tasks" class="step" data-x="4500" data-y="1800">
+		<h1 class="slide-title">CPU-intensive Tasks</h1>
+    <h2><span class="num">1</span> thread</h2>
+    <h3>be careful!</h3>
+  </div>
+
+	<div id="rapidly-changing" class="step" data-x="6000" data-y="1800">
+		<h1 class="slide-title">Rapidly Changing</h1>
+    <table>
+      <tr>
+        <td>v0.6.13 <span class="date">2012.03.15</span></td>
+        <td>v0.7.6 <span class="date">2012.02.13</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.12 <span class="date">2012.03.02</span></td>
+        <td>v0.7.5 <span class="date">2012.02.23</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.11 <span class="date">2012.02.17</span></td>
+        <td>v0.7.4 <span class="date">2012.02.14</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.10 <span class="date">2012.02.02</span></td>
+        <td>v0.7.3 <span class="date">2012.02.07</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.9 <span class="date">2012.01.27</span></td>
+        <td>v0.7.2 <span class="date">2012.02.01</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.8 <span class="date">2012.01.19</span></td>
+        <td>v0.7.1 <span class="date">2012.01.23</span></td>
+      </tr>
+      <tr>
+        <td>v0.6.7 <span class="date">2012.01.06</span></td>
+        <td>v0.7.0 <span class="date">2012.01.16</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="benefits" class="step centered" data-x="0" data-y="2700">
+    <h1><span class="num">3</span> Benefits</h1>
+  </div>
+
+	<div id="multi-platform" class="step" data-x="1500" data-y="2700">
+    <h1 class="slide-title">Multi-Platform</h1>
+    <div class="centered">
+      <img src="images/nodejs-download.png"/>
+    </div>
+  </div>
+
+	<div id="lightweight" class="step" data-x="3000" data-y="2700">
+		<h1 class="slide-title">Lightweight</h1>
+    <h3>single thread</h3>
+  </div>
+
+	<div id="dead-lock-free" class="step" data-x="4500" data-y="2700">
+		<h1 class="slide-title">Dead-lock Free</h1>
+    <h3>single thread simplifies concurrency</h3>
+  </div>
+
+	<div id="monoglot" class="step" data-x="6000" data-y="2700">
+		<h1 class="slide-title">Monoglot Programming</h1>
+    <h2>JavaScript on the client</h2>
+    <h3>JavaScript on the server</h3>
+  </div>
+
+	<div id="github-popular" class="step" data-x="7500" data-y="2700">
+		<h1 class="slide-title">Popular</h1>
+    <div class="centered">
+      <a target="_blank" href="https://github.com/popular/watched"><img src="images/github-popular.png"/></a>
+    </div>
+  </div>
+
+	<div id="fast-ruby" class="step" data-x="9000" data-y="2700">
+		<h1 class="slide-title">Fast</h1>
+    <div class="centered">
+      <a target="_blank" href="http://shootout.alioth.debian.org/u32/benchmark.php"><img class="benchmark" src="http://shootout.alioth.debian.org/u32/chartvs.php?r=eNodTskRBEEISklbVIjC%2FLNZZl8Wt72K2gMDmQdhpm42SjSJZZnstKU5hjd4KwfEWpOPFc45YQ3SKG4eEDggRf07k1eM6Gcn%2Bay1lLrWLPI6mQOfx7TF6%2BvZRdWHsL3u9EIY2fn9uW%2FeD1l9KXk%3D&m=eNozMFHwTSxSMDIwNFIoNTZSyAMAI98EEg%3D%3D&w=eNqrTCwq8y%2BzAAALvwLA"/></a>
+    </div>
+  </div>
+
+	<div id="vibrant-community" class="step" data-x="10500" data-y="2700">
+		<h1 class="slide-title">Vibrant Community</h1>
+    <div class="centered">
+      <a target="_blank" href="http://search.npmjs.org/"><img src="images/npm.png"/></a>
+      <h2>7,728 packages</h2>
+      <h3>as of 11:30pm EDT 2012.03.05</h3>
+    </div>
+  </div>
+
+	<div id="conceptually-simple" class="step" data-x="12000" data-y="2700">
+		<h1 class="slide-title">Conceptually Simple</h1>
+    <div class="centered">
+      <img src="images/event-loop.png"/>
+    </div>
+  </div>
+
+	<div id="small-core" class="step" data-x="13500" data-y="2700">
+		<h1 class="slide-title">Small Core</h1>
+    <h2><span class="num">36</span> JavaScript source files</h2>
+    <h2><span class="num">36</span> C++ source files</h2>
+  </div>
+
+	<div id="learning-curve" class="step" data-x="15000" data-y="2700">
+		<h1 class="slide-title">Short Learning Curve</h1>
+    <h2><img src="images/check.png"/> Understand Node.js Theory</h2>
+    <h2><img src="images/check.png"/> Understand JavaScript</h2>
+    <h2><img src="images/check.png"/> Understand Evented Programming</h2>
+    <h3>You just need to learn new APIs</h3>
+  </div>
+
+  <div id="getting-smart" class="step centered" data-x="0" data-y="3600">
+    <h1><span class="num">4</span> Getting Smart</h1>
+  </div>
+
+  <div id="smart-steps" class="step" data-x="1500" data-y="3600">
+    <h1><span class="num">1</span> install Node from source</h1>
+    <h1><span class="num">2</span> write some small programs</h1>
+    <h1><span class="num">3</span> read the source</h1>
+    <h1><span class="num">4</span> re-implement a popular pkg</h1>
+  </div>
+
+  <div id="packages" class="step" data-x="3000" data-y="3600">
+		<h1 class="slide-title">Packages to Try</h1>
+    <table>
+      <tr>
+        <td><a target="_blank" href="http://expressjs.com/">express</a><div class="desc">web framework</div></td>
+        <td><a target="_blank" href="https://github.com/caolan/async">async<div class="desc">async helpers</div></td>
+      </tr>
+      <tr>
+        <td><a target="_blank" href="https://github.com/nearinfinity/node-persist">persist<div class="desc">ORM framework</div></td>
+        <td><a target="_blank" href="http://socket.io/">socket.io<div class="desc">realtime networking</div></td>
+      </tr>
+      <tr>
+        <td><a target="_blank" href="https://github.com/nearinfinity/node-db-migrate">db-migrate<div class="desc">database migrations</div></td>
+        <td><a target="_blank" href="http://vowsjs.org/">vows<div class="desc">BDD framework</div></td>
+      </tr>
+      <tr>
+        <td><a target="_blank" href="https://github.com/substack/dnode">dnode<div class="desc">RPC</div></td>
+        <td><a target="_blank" href="https://github.com/nearinfinity/node-java">java<div class="desc">bridge to Java API</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="questions" class="step" data-x="4500" data-y="3600">
+    <div class="centered">
+      <h1>Questions?</h1>
+      <div class="contact">
+        <h2>Jeff Kunkle</h2>
+        <h3>@kunklejr</h3>
+        <h3>@nearinfinity</h3>
+        <h3>git.io/nic</h3>
+        <img src="images/nic-logo.png"/>
+      </div>
+    </div>
+  </div>
+
+  <div id="overview" class="step" data-x="4000" data-y="2000" data-z="7000">
+  </div>
+
+</div>
+
+<div id="status">
+  0 participants, press 'c' to chat with them
+</div>
+
+<div id="chat">
+  <span>Chat</span>
+  <a href="#" onclick="javascript:chat.close(); return false;">X</a>
+  <div id="chat-log"></div>
+  <input id="chat-input" type="text" name="message" placeholder="type chat here"/>
+</div>
+<!--
+    
+    To make all described above really work, you need to include impress.js in the page.
+    I strongly encourage to minify it first.
+    
+    You also need to call a `impress()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. Not only because it's a good practice, but also
+    because I should be done when the whole document is ready.
+    Of course you can wrap it in any kind of "DOM ready" event, but I was to lazy to do so ;)
+    
+-->
+<script src="js/impress.js"></script>
+<script type="text/javascript">var presentation = impress();</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/presentation.js"></script>
+<script src="js/chat.js"></script>
+<script src="js/shCore.js"></script>
+<script src="js/shBrushJScript.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
+<!--
+    
+    The `impress()` function also gives you access to API to control the presentation.
+    
+    Just store the result of the call:
+    
+        var api = impress();
+    
+    and you will get three functions you can call:
+    
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation
+        `api.goto( stepElement ) - moves the presentation to given step element (the DOM element of the step).
+    
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+    
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+    
+-->
+
+</body>
+</html>

@@ -1,0 +1,402 @@
+body {
+/*    font-family: 'PT Sans', sans-serif;*/
+	font-family: Arial, sans-serif;
+    
+    min-height: 740px;
+
+    background: #46483E;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(#46483E), to(#33342D));
+    background: -webkit-radial-gradient(#46483E, #33342D);
+    background:    -moz-radial-gradient(#46483E, #33342D);
+    background:      -o-radial-gradient(#46483E, #33342D);
+    background:         radial-gradient(#46483E, #33342D);
+
+    -webkit-font-smoothing: antialiased;
+}
+
+b, strong { font-weight: bold }
+i, em { font-style: italic}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    /*padding: 0 0.1em;*/
+    /*background: rgba(255,255,255,0.5);*/
+    /*text-shadow: -1px -1px 2px rgba(100,100,100,0.9);*/
+    /*border-radius: 0.2em;*/
+
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+h1 {
+	margin-bottom: 0.5em;
+	font-size: 200%;
+}
+
+table {
+	border-top: 1px solid #8CC84B;
+	border-left: 1px solid #8CC84B;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding: 10px 20px;
+	border-right: 1px solid #8CC84B;
+	border-bottom: 1px solid #8CC84B;
+  text-align: center;
+}
+
+tr:nth-child(2n) {
+  background-color: rgb(92, 94, 82);
+}
+
+div.code {
+  font-size: 65%;
+}
+
+caption {
+	color: #A6AC94;
+  font-size: 40%;
+  text-align: center;
+}
+
+.step {
+    width: 1024px;
+    padding: 10px;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+
+/*    font-family: 'PT Serif', georgia, serif;*/
+
+    font-size: 48px;
+    line-height: 1.5;
+}
+
+/* fade out inactive slides */
+
+.step {
+    -webkit-transition: opacity 1s;
+    -moz-transition:    opacity 1s;
+    -ms-transition:     opacity 1s;
+    -o-transition:      opacity 1s;
+    transition:         opacity 1s;
+}
+
+.step:not(.active) {
+    opacity: 0.3;
+}
+
+.fallback-message {
+    font-family: sans-serif;
+    line-height: 1.3;
+
+    display: none;
+    width: 780px;
+    padding: 10px 10px 0;
+    margin: 20px auto;
+
+    border-radius: 10px;
+    border: 1px solid #E4C652;
+    background: #EEDC94;
+}
+
+.fallback-message p {
+    margin-bottom: 10px;
+}
+
+.impress-not-supported .step {
+    position: relative;
+    opacity: 1;
+    margin: 20px auto;
+}
+
+.impress-not-supported .fallback-message {
+    display: block;
+}
+
+div.centered {
+	text-align: center;
+}
+
+h1.slide-title {
+	color: #A6AC94;
+  margin-bottom: 20px;
+}
+
+span.num {
+	background-color: #8CC84B;
+	border-radius: 0.2em;
+	padding: 0.2em;
+}
+
+img.benchmark {
+  width: 800px;
+}
+
+#title {
+	text-align: center;
+}
+
+#title .footer {
+	text-align: left;
+	background-color: white;
+	color: black;
+	padding: 10px;
+	font-size: 80%;
+	border: 5px solid #A6AC94;
+	border-radius: 10px;
+  margin-top: 30px;
+}
+
+#title img.node-logo {
+  position: relative;
+  top: 50px;
+}
+
+#title img.nic-logo {
+	float: right;
+  margin-top: 10px;
+}
+
+#title h2 {
+  position: relative;
+  top: -130px;
+  font-size: 60%;
+}
+
+#title h3 {
+  font-size: 50%;
+  color: #A6AC94;
+  margin-top: 20px;
+}
+
+#agenda {
+	text-align: left;
+}
+
+#cpu-intensive-tasks h2 {
+  font-size: 150%;
+  color: #A6AC94;
+  margin-left: 100px;
+  margin-top: -50px;
+}
+
+#cpu-intensive-tasks h3 {
+  font-size: 200%;
+  text-align: right;
+}
+
+#cpu-intensive-tasks .num {
+  font-size: 300%;
+	color: #8CC84B;
+  background: none;
+}
+
+#rapidly-changing table {
+  border: none;
+  width: 100%;
+}
+
+#rapidly-changing td {
+  border: none;
+  padding-bottom: 0;
+  font-size: 90%;
+}
+
+#rapidly-changing tr {
+  background-color: inherit;
+}
+
+#rapidly-changing .date {
+  font-size: 60%;
+  color: #A6AC94;
+}
+
+#lightweight h3 {
+  font-size: 200%;
+  text-align: right;
+  margin-top: 200px;
+}
+
+#dead-lock-free h3 {
+  font-size: 125%;
+  text-align: right;
+  margin-top: 200px;
+}
+
+#monoglot h2 {
+  font-size: 125%;
+  text-align: left;
+  margin-top: 150px;
+}
+
+#monoglot h3 {
+  font-size: 125%;
+  text-align: right;
+}
+
+#vibrant-community h3 {
+  font-size: 60%;
+  color: #A6AC94;
+}
+
+#vibrant-community img {
+  margin: 50px 0;
+}
+
+#small-core .num {
+  font-size: 300%;
+	color: #8CC84B;
+  background: none;
+}
+
+#small-core h1 {
+  margin-bottom: 50px;
+}
+
+#small-core h2 {
+  margin-left: 50px;
+  font-size: 130%;
+  line-height: 1;
+}
+
+#learning-curve h2 {
+  padding-bottom: 20px;
+  margin-left: 50px;
+}
+
+#learning-curve img {
+  margin-bottom: -20px;
+}
+
+#learning-curve h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 145%;
+  margin-top: 20px;
+}
+
+#smart-steps h1 {
+  line-height: 1;
+  font-size: 140%;
+}
+
+#smart-steps .num {
+  font-size: 200%;
+	color: #8CC84B;
+  background: none;
+}
+
+#packages table {
+  border: none;
+  width: 100%;
+  margin-left: 50px;
+}
+
+#packages tr {
+  background-color: inherit;
+}
+
+#packages td {
+  border: none;
+  text-align: left;
+}
+
+#packages .desc {
+  font-size: 50%;
+  color: #A6AC94;
+  margin-top: -20px;
+  margin-left: 50px;
+}
+
+#questions div.floater {
+  float: right;
+  text-align: center;
+}
+
+#questions div.contact {
+  background-color: white;
+  border-radius: 10px;
+  color: black;
+  padding: 30px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#questions h2 {
+  margin-bottom: 20px;
+}
+
+#questions h3 {
+	color: rgb(255, 120, 1);
+  font-size: 60%;
+  margin-bottom: -15px;
+}
+
+#questions div.contact img {
+  margin-top: 50px;
+}
+
+#status {
+  position: fixed;
+  bottom: 0;
+  background: #45473D;
+  padding: 5px;
+	color: #A6AC94;
+  width: 100%;
+  font-size: 80%;
+}
+
+#chat {
+  background: #45473D;
+  position: absolute;
+  width: 200px;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  display:none;
+	color: #A6AC94;
+}
+
+#chat.active {
+  display: block;
+}
+
+#chat a {
+  text-align: right;
+  margin-bottom: 10px;
+  float: right;
+}
+
+#chat-log {
+  background-color: white;
+  height: 250px;
+  width: 190px;
+	color: black;
+  padding: 5px;
+  font-size: 80%;
+  overflow: auto;
+}
+
+#chat-log p {
+  margin-bottom: 0.5em;
+}
+
+#chat-input {
+  margin-top: 10px;
+  width: 195px;
+	color: black;
+}
